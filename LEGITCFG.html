@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Config | Particles + import link</title>
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter + Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #0a0c12;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Анимированный фон с частицами */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 170, 255, 0.2) 1px, transparent 1px),
+                radial-gradient(circle at 30% 50%, rgba(0, 170, 255, 0.15) 1px, transparent 1px),
+                radial-gradient(circle at 70% 40%, rgba(100, 200, 255, 0.18) 2px, transparent 2px),
+                radial-gradient(circle at 90% 80%, rgba(0, 170, 255, 0.12) 1px, transparent 1px),
+                radial-gradient(circle at 40% 10%, rgba(80, 180, 255, 0.1) 1px, transparent 1px);
+            background-size: 180px 180px, 220px 220px, 280px 280px, 320px 320px, 200px 200px;
+            animation: particlesMove 90s linear infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes particlesMove {
+            0% { background-position: 0 0, 0 0, 0 0, 0 0, 0 0; }
+            100% { background-position: 300px 300px, -200px 200px, 400px -150px, -250px 350px, 150px -100px; }
+        }
+
+        /* Основная карточка */
+        .card {
+            position: relative;
+            z-index: 10;
+            max-width: 720px;
+            width: 100%;
+            background: #14181f;
+            border: 1px solid #2a3a4a;
+            border-radius: 2rem;
+            padding: 2.5rem 2.2rem;
+        }
+
+        /* Шапка */
+        .header {
+            text-align: center;
+            margin-bottom: 2.2rem;
+        }
+
+        .chip {
+            display: inline-block;
+            background: transparent;
+            border: 1px solid #2a6a9a;
+            color: #8ab0d0;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding: 0.3rem 1.2rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: #e0f0ff;
+            letter-spacing: -0.02em;
+        }
+
+        .sub {
+            color: #7088a0;
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Список шагов (первые 4) */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin: 2rem 0;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: transparent;
+            border: 1px solid #2a3a4a;
+            border-radius: 1.5rem;
+            padding: 0.7rem 1.2rem 0.7rem 0.8rem;
+            transition: border-color 0.1s;
+        }
+
+        .step:hover {
+            border-color: #3a6a9a;
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            background: #1e2630;
+            border-radius: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8ab0d0;
+            font-size: 1.1rem;
+            border: 1px solid #2a4a6a;
+        }
+
+        .step-text {
+            flex: 1;
+            color: #c0d0e0;
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        .step-text strong {
+            font-weight: 500;
+            color: #d0e8ff;
+            background: transparent;
+            padding: 0.1rem 0.5rem;
+            border: 1px solid #2a5a8a;
+            border-radius: 20px;
+        }
+
+        /* Блок с кодом */
+        .code-section {
+            margin: 2rem 0 1.5rem;
+            background: #1e242c;
+            border: 1px solid #2a4a6a;
+            border-radius: 3rem;
+            padding: 0.5rem 1rem 0.5rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .code {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #d0f0ff;
+            letter-spacing: 1px;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: 1px solid #2a6a9a;
+            color: #a0c0e0;
+            padding: 0.6rem 1.8rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.1s, border-color 0.1s;
+        }
+
+        .copy-btn:hover {
+            background: #1e3a5a;
+            border-color: #3a8ac0;
+            color: #ffffff;
+        }
+
+        .copy-btn:active {
+            background: #1a2f4a;
+        }
+
+        .copy-btn i {
+            font-size: 1rem;
+        }
+
+        /* Пятый шаг (под кодом) */
+        .step-fifth {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border: 1px solid #2a3a4a;
+            border-radius: 1.5rem;
+            padding: 0.7rem 1.2rem 0.7rem 0.8rem;
+            margin: 1.5rem 0 1.5rem;
+        }
+
+        .step-fifth:hover {
+            border-color: #3a6a9a;
+        }
+
+        .step-fifth .step-icon {
+            width: 40px;
+            height: 40px;
+            background: #1e2630;
+            border-radius: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #8ab0d0;
+            font-size: 1.1rem;
+            border: 1px solid #2a4a6a;
+        }
+
+        .step-fifth .step-text {
+            flex: 1;
+            color: #c0d0e0;
+            font-weight: 400;
+            font-size: 1rem;
+        }
+
+        .step-fifth .step-text strong {
+            font-weight: 500;
+            color: #d0e8ff;
+            border: 1px solid #2a5a8a;
+            border-radius: 20px;
+            padding: 0.1rem 0.5rem;
+        }
+
+        /* Ссылка в виде кнопки импорта */
+        .import-wrapper {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .import-link {
+            display: inline-block;
+            background: #1e3a5a;
+            border: 1px solid #2a6a9a;
+            border-radius: 3rem;
+            padding: 0.9rem 1.8rem;
+            font-size: 1.6rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #e0f0ff;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.1s, border-color 0.1s;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .import-link:hover {
+            background: #2a4a7a;
+            border-color: #3a8ac0;
+            color: #ffffff;
+        }
+
+        .import-link:active {
+            background: #1a2f4a;
+        }
+
+        /* Футер */
+        .footer {
+            margin-top: 2.5rem;
+            color: #506580;
+            font-size: 0.75rem;
+            text-align: center;
+            border-top: 1px solid #2a3a4a;
+            padding-top: 1.2rem;
+        }
+
+        /* Тостер */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(30px);
+            background: #1e2630;
+            border: 1px solid #2a6a9a;
+            color: #e0f0ff;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: 400;
+            box-shadow: none;
+            opacity: 0;
+            transition: opacity 0.2s, transform 0.2s;
+            pointer-events: none;
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .toast i {
+            font-size: 1.2rem;
+            color: #6ab0ff;
+        }
+
+        /* Адаптация */
+        @media (max-width: 600px) {
+            .card { padding: 2rem 1.5rem; }
+            h1 { font-size: 2rem; }
+            .code { font-size: 1.2rem; }
+            .step-text { font-size: 0.9rem; }
+            .step-fifth .step-text { font-size: 0.9rem; }
+            .import-link { font-size: 1.3rem; letter-spacing: 3px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+
+    <div class="card">
+        <div class="header">
+            <div class="chip"><i class="fas fa-moon"></i> midnight</div>
+            <h1>LEGIT CONFIG</h1>
+            <div class="sub">Counter Strike 2 • активация</div>
+        </div>
+
+        <!-- Первые 4 шага -->
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-play"></i></div>
+                <div class="step-text">Запусти <strong>CS2 + Midnight</strong></div>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-folder-open"></i></div>
+                <div class="step-text">Раздел <strong>«Конфиги»</strong> в меню чита</div>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-arrow-up-from-bracket"></i></div>
+                <div class="step-text">Кнопка <strong>со стрелкой</strong> (импорт)</div>
+            </div>
+            <div class="step">
+                <div class="step-icon"><i class="fas fa-key"></i></div>
+                <div class="step-text">Введи код конфига:</div>
+            </div>
+        </div>
+
+        <!-- Код -->
+        <div class="code-section">
+            <span class="code" id="configCode">MN-8WFL0ZORT05GKB0MSPX123MXB</span>
+            <button class="copy-btn" id="copyBtn"><i class="far fa-copy"></i> COPY</button>
+        </div>
+
+        <!-- Пятый шаг -->
+        <div class="step-fifth">
+            <div class="step-icon"><i class="fas fa-arrow-right-to-bracket"></i></div>
+            <div class="step-text">Нажми <strong>«ИМПОРТ»</strong> в чите</div>
+        </div>
+
+        <!-- Ссылка-кнопка для перехода на другой сайт -->
+        <div class="import-wrapper">
+            <a href="https://funpay.com/orders/" target="_blank" class="import-link" id="importLink">Оставь отзыв, получи 🎁</a>
+        </div>
+
+        <div class="footer">
+            <i class="fas fa-shield"></i> ShizzyBoost • FunPay
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i> <span id="toastMessage">Config copied</span>
+    </div>
+
+    <script>
+        (function() {
+            const copyBtn = document.getElementById('copyBtn');
+            const codeSpan = document.getElementById('configCode');
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+
+            function showToast(message) {
+                toastMsg.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            // Копирование кода
+            copyBtn.addEventListener('click', async () => {
+                const code = codeSpan.innerText.trim();
+                try {
+                    await navigator.clipboard.writeText(code);
+                    showToast('✅ Config copied!');
+                } catch (err) {
+                    const ta = document.createElement('textarea');
+                    ta.value = code;
+                    document.body.appendChild(ta);
+                    ta.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(ta);
+                    showToast('✅ Config copied!');
+                }
+            });
+
+            // Ссылка уже обрабатывается браузером, дополнительный JS не требуется
+        })();
+    </script>
+</body>
+</html>
